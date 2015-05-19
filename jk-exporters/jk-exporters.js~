@@ -39,7 +39,7 @@ function includeSupportRef(fileRefs) {
 
 function JK(){
     if (!(this instanceof JK)) return new JK();
-    this.path = ("jkPath" in window) ? jkPath : "./";
+    this.path = jkPath || "./";
 }
 jk = new JK();
 

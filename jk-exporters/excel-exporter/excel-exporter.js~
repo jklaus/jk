@@ -2,7 +2,7 @@ function ExcelExporter(){
 	// initialization
 	if(!(jk.hasActiveX)) {
 		var fileRefs = [
-			jk.path+"jk-exporters/excel-exporter/support/xlsx.core.min.js"
+			"./jk-exporters/excel-exporter/support/xlsx.core.min.js"
 		];
 
 		includeSupportRef(fileRefs);

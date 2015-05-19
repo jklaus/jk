@@ -1,0 +1,100 @@
+<script type="text/javascript">
+	jkPath = "../../../../";
+</script>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="mock.js"></script>
+<script type="text/javascript" src="../../../../jk-exporters/jk-exporters.js"></script>
+
+
+<script type="text/javascript">
+function test(){
+	var mockData = getData();
+	var export1 = {
+		name:'TestExport1',
+		destination:null,
+		sheets:[
+			{
+				name:'Associates',
+				data:mockData,
+				columns:[
+					{
+						title: {
+							name: 'ID',
+							style: null
+						},
+						property: {
+							name: 'id',
+							style: null
+						}
+					},
+					{
+						title: {
+							name: 'First Name',
+							style: null
+						},
+						property: {
+							name: 'first_name',
+							style: null
+						}
+					},
+					{
+						title: {
+							name: 'Last Name',
+							style: null
+						},
+						property: {
+							name: 'last_name',
+							style: null
+						}
+					}
+				]
+			},
+			{
+				name:'Email Addresses',
+				data:mockData,
+				columns:[
+					{
+						title: {
+							name: 'ID',
+							style: null
+						},
+						property: {
+							name: 'id',
+							style: null
+						}
+					},
+					{
+						title: {
+							name: 'Name',
+							style: null
+						},
+						property: {
+							name: null,
+							style: null,
+							resolve:function(t){
+								var name = (t.last_name + ", " + t.first_name);
+								return name;
+							}
+						}
+					},
+					{
+						title: {
+							name: "",
+							style: null
+						},
+						property: {
+							name: 'email',
+							style: null
+						}
+					}
+				]
+			}
+		]
+	};
+
+	jk.exporters.excel.process(export1);
+}
+</script>
+
+<input type='button' value='Export' onClick='test()'>
