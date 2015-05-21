@@ -100,10 +100,14 @@ function ExcelExporter(){
 
 	function populateWorksheet(ws, data, cols){
 		var range = {s: {c:0, r:0}, e: {c:cols.length, r:data.length+1 }};
-
+		var wscols = [];
+		
 		$(cols).each(function(iC, col){
 			var title = col.title.name || col.property.name;
+			var width = !isNaN(col.width) ? col.width : 10; // Ensure column width is set to a number, if not default to 10
+			
 			setCellValue(0, iC, title, ws);
+			wscols.push({ wch: width });
 
 			$(data).each(function(iR, obj){
 				var val = resolvePropertyValue(col.property, obj);
@@ -112,6 +116,7 @@ function ExcelExporter(){
 		});
 
 		ws['!ref'] = XLSX.utils.encode_range(range);
+		ws['!cols'] = wscols;
 	}
 
 	function setCellValue(iR, iC, value, ws){
